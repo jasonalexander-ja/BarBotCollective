@@ -6,22 +6,18 @@
 #include "Adafruit_VL53L0X.h"
 
 #define STEPS 800
-#define MAX_RANGE 1000 
-#define MM_PER_POSITION 100
-#define VARIATION 10
+#define STEPS_PER_POS 250
+#define CUP_DIST 150 
 
-int zeroOffset = 0;
-
-AccelStepper stepper(AccelStepper::MotorInterfaceType::DRIVER, 12, 13);
+AccelStepper stepper(AccelStepper::MotorInterfaceType::DRIVER, 13, 12);
 
 Adafruit_VL53L0X lox = Adafruit_VL53L0X();
-bool loxOk = false;
+bool loxOk = true;
 
 void waitForCupPlaced();
 void waitForCupRemoved();
-void setZeroOffset();
+void setZero();
 int moveToPosition(int pos);
-int getDistance();
 
 void unitSetup()
 {
@@ -32,10 +28,10 @@ void unitSetup()
 }
 
 int performAction(int option)
-{ 
+{
     if (!loxOk)
         return CaddyErrors::DistSensorInitError;
-    
+
     switch (option)
     {
         case 255:
@@ -45,45 +41,28 @@ int performAction(int option)
             waitForCupRemoved();
             break;
         case 253: 
-            setZeroOffset();
+            setZero();
             break;
         default:
             return moveToPosition(option);
     }
 
     // Return 0 when ran sucessfully 
-    return 0;
+    return 1;
 }
 
 int moveToPosition(int pos)
 {
-    int target = (pos * MM_PER_POSITION) - (MM_PER_POSITION / 2); 
-    return 0;
+    int new_pos = pos * STEPS_PER_POS;
+    
+    delay(3000);
+    //stepper.runToNewPosition(new_pos);
+    return 1;
 }
 
-int getDistance()
+void setZero()
 {
-    VL53L0X_RangingMeasurementData_t measure;
-    for (int i = 0; i < 10; i++)
-    {
-        lox.rangingTest(&measure, false);
-        if (measure.RangeStatus != 4 && 
-            measure.RangeMilliMeter - zeroOffset <= MAX_RANGE)
-        {
-            return measure.RangeMilliMeter - zeroOffset;
-        }
-    }
-    return -1;
-}
-
-void setZeroOffset()
-{
-    VL53L0X_RangingMeasurementData_t measure;
-    lox.rangingTest(&measure, false);
-    if (measure.RangeStatus != 4 && measure.RangeMilliMeter <= MAX_RANGE)
-    {
-        zeroOffset = measure.RangeMilliMeter;
-    }
+    stepper.setCurrentPosition(0l);
 }
 
 void waitForCupPlaced()
@@ -92,7 +71,7 @@ void waitForCupPlaced()
     while (true)
     {
         lox.rangingTest(&measure, false);
-        if (measure.RangeMilliMeter == 4 || measure.RangeMilliMeter > MAX_RANGE)
+        if (measure.RangeMilliMeter <= CUP_DIST)
         {
             delay(2000);
             return;
@@ -107,7 +86,7 @@ void waitForCupRemoved()
     while (true)
     {
         lox.rangingTest(&measure, false);
-        if (measure.RangeMilliMeter != 4 && measure.RangeMilliMeter <= MAX_RANGE)
+        if (measure.RangeMilliMeter >= CUP_DIST)
         {
             delay(2000);
             return;

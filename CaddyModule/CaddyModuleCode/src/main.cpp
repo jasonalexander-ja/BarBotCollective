@@ -12,9 +12,9 @@ and ignore this file.
 
 #define LED_BUILTIN 2
 
-uint8_t option = 0;
-bool isRunning = false;
-uint8_t lastRunResult = 0;
+volatile uint8_t option = 0;
+volatile bool isRunning = false;
+volatile uint8_t lastRunResult = 1;
 
 void receiveEvent(int howMany);
 void requestEvent();
@@ -22,23 +22,27 @@ void requestEvent();
 void setup()
 {
 	pinMode(LED_BUILTIN, OUTPUT);
+	Serial.begin(115200);
 	unitSetup();
-	Wire.begin(UNIT_ADDRESS, 27, 26);
+	Wire.begin(UNIT_ADDRESS, 27, 26, 0u);
 	Wire.onReceive(receiveEvent);
 	Wire.onRequest(requestEvent);
+	Serial.println("Started");
 }
 
 void loop()
 {
-	digitalWrite(LED_BUILTIN, HIGH);
-	delay(50);
 	if (isRunning)
 	{
-		lastRunResult = performAction(option);
+		Serial.print("Executing: ");
+		Serial.println(String(option));
+		
+		delay(2000);
+		//lastRunResult = performAction(option);
 		isRunning = false;
+		Serial.println("End. ");
+		Serial.println("");
 	}
-	digitalWrite(LED_BUILTIN, LOW);
-	delay(50);
 }
 
 void receiveEvent(int howMany)
@@ -47,11 +51,15 @@ void receiveEvent(int howMany)
 	{
 		option = Wire.read();
 	}
+	Serial.print("Received ");
+	Serial.println(String(option));
 	isRunning = true;
 }
 
 void requestEvent()
 {
-	uint8_t result[2] = { !isRunning, lastRunResult };
-	Wire.write(result, 2);
+	uint8_t result[4] = { 170, isRunning ? 1 : 2, lastRunResult, 170 };
+	Wire.write(result, 4);
+	Serial.print("Status: ");
+	Serial.println(String(lastRunResult));
 }
