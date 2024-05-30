@@ -3,7 +3,7 @@
 #include "Adafruit_VL53L0X.h"
 
 #define STEPS 800
-#define STEPS_PER_POS 250
+#define STEPS_PER_POS 500
 #define CUP_DIST 150 
 
 #define UNIT_ADDRESS 18
@@ -57,8 +57,8 @@ void requestEvent()
 
 void unitSetup()
 {
-  stepper.setMaxSpeed(100);
-  stepper.setAcceleration(20);
+  stepper.setMaxSpeed(6000);
+  stepper.setAcceleration(720);
   loxOk = lox.begin(VL53L0X_I2C_ADDR, false, &Wire);
 }
 
@@ -68,18 +68,16 @@ typedef enum {
 
 int performAction(int option)
 {
-  if (!loxOk)
-    return CaddyErrors::DistSensorInitError;
 
   int res = 0;
 
   switch (option)
   {
     case 255:
-      waitForCupPlaced();
+      res = waitForCupPlaced();
       break;
     case 254:
-      waitForCupRemoved();
+      res = waitForCupRemoved();
       break;
     case 253: 
       setZero();
@@ -105,8 +103,10 @@ void setZero()
   stepper.setCurrentPosition(0l);
 }
 
-void waitForCupPlaced()
+int waitForCupPlaced()
 {
+  if (!loxOk)
+    return CaddyErrors::DistSensorInitError;
   VL53L0X_RangingMeasurementData_t measure;
   while (true)
   {
@@ -114,14 +114,16 @@ void waitForCupPlaced()
     if (measure.RangeMilliMeter <= CUP_DIST)
     {
       delay(2000);
-      return;
+      return 0;
     }
     delay(200);
   }
 }
 
-void waitForCupRemoved()
+int waitForCupRemoved()
 {
+  if (!loxOk)
+    return CaddyErrors::DistSensorInitError;
   VL53L0X_RangingMeasurementData_t measure;
   while (true)
   {
@@ -129,7 +131,7 @@ void waitForCupRemoved()
     if (measure.RangeMilliMeter >= CUP_DIST)
     {
       delay(2000);
-      return;
+      return 0;
     }
     delay(200);
   }
