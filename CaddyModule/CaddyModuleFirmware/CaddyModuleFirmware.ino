@@ -25,11 +25,16 @@ void setup()
 	Wire1.begin(UNIT_ADDRESS);
 	Wire1.onReceive(receiveEvent);
 	Wire1.onRequest(requestEvent);
+  Serial.begin(115200);
 }
 
 void loop()
 {
   digitalWrite(LED_BUILTIN, HIGH);
+  VL53L0X_RangingMeasurementData_t measure;
+  Serial.print("Measured ");
+  lox.rangingTest(&measure, false);
+  Serial.println(String(measure.RangeMilliMeter));
 	if (isRunning)
 	{
 		lastRunResult = performAction(option);
@@ -127,7 +132,9 @@ int waitForCupRemoved()
   VL53L0X_RangingMeasurementData_t measure;
   while (true)
   {
+    Serial.print("Measured ");
     lox.rangingTest(&measure, false);
+    Serial.println(String(measure.RangeMilliMeter));
     if (measure.RangeMilliMeter >= CUP_DIST)
     {
       delay(2000);
