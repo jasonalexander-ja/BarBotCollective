@@ -23,17 +23,17 @@ $INSBASE
   9
 $EXTMIN
  10
--20
+0
  20
--12
+-1
  30
 0
   9
 $EXTMAX
  10
-85
+105
  20
-52
+61
  30
 0
   9
@@ -1115,9 +1115,9 @@ AcDbViewportTableRecord
  21
 1
  12
-85.91024242467017
+55.18576964847291
  22
-39.17097958172462
+32.09887885975397
  13
 0
  23
@@ -1143,7 +1143,7 @@ AcDbViewportTableRecord
  37
 0
  40
-102.887742713355
+10.18658426905757
  41
 2.127236580516898
  42
@@ -2665,11 +2665,11 @@ ByLayer
 100
 AcDbCircle
  10
-0
+52.5
  20
-0
+30
  40
-5
+29.5
   0
 CIRCLE
   5
@@ -2687,11 +2687,11 @@ ByLayer
 100
 AcDbCircle
  10
-40
+3
  20
-0
+3
  40
-5
+1.5
   0
 CIRCLE
   5
@@ -2709,11 +2709,11 @@ ByLayer
 100
 AcDbCircle
  10
-40
+3
  20
-40
+57
  40
-5
+1.5
   0
 CIRCLE
   5
@@ -2731,13 +2731,13 @@ ByLayer
 100
 AcDbCircle
  10
-0
+102
  20
-40
+57
  40
-5
+1.600000000000009
   0
-LINE
+CIRCLE
   5
 51
 100
@@ -2751,91 +2751,17 @@ ByLayer
 370
    -1
 100
-AcDbLine
+AcDbCircle
  10
--15
+102
  20
-25
- 11
--5
- 21
-25
-  0
-LINE
-  5
-52
-100
-AcDbEntity
-  8
-0
-  6
-ByLayer
- 62
-  256
-370
-   -1
-100
-AcDbLine
- 10
--5
- 20
-25
- 11
--5
- 21
-15
-  0
-LINE
-  5
-53
-100
-AcDbEntity
-  8
-0
-  6
-ByLayer
- 62
-  256
-370
-   -1
-100
-AcDbLine
- 10
--5
- 20
-15
- 11
--15
- 21
-15
-  0
-LINE
-  5
-54
-100
-AcDbEntity
-  8
-0
-  6
-ByLayer
- 62
-  256
-370
-   -1
-100
-AcDbLine
- 10
--15
- 20
-15
- 11
--15
- 21
-25
+3
+ 40
+1.5
   0
 LWPOLYLINE
   5
-55
+52
 100
 AcDbEntity
   8
@@ -2855,147 +2781,21 @@ AcDbPolyline
  43
 0
  10
-70
- 20
-15
- 10
-80
- 20
-15
- 10
-80
- 20
-25
- 10
-70
- 20
-25
-  0
-CIRCLE
-  5
-56
-100
-AcDbEntity
-  8
 0
-  6
-ByLayer
- 62
-  256
-370
-   -1
-100
-AcDbCircle
- 10
--17
  20
--7
- 40
-1.5
-  0
-CIRCLE
-  5
-57
-100
-AcDbEntity
-  8
-0
-  6
-ByLayer
- 62
-  256
-370
-   -1
-100
-AcDbCircle
- 10
--17
- 20
-47.00000000000001
- 40
-1.5
-  0
-CIRCLE
-  5
-58
-100
-AcDbEntity
-  8
-0
-  6
-ByLayer
- 62
-  256
-370
-   -1
-100
-AcDbCircle
- 10
-82.00000000000001
- 20
-47
- 40
-1.5
-  0
-CIRCLE
-  5
-59
-100
-AcDbEntity
-  8
-0
-  6
-ByLayer
- 62
-  256
-370
-   -1
-100
-AcDbCircle
- 10
-82
- 20
--7
- 40
-1.5
-  0
-LWPOLYLINE
-  5
-5A
-100
-AcDbEntity
-  8
-0
-  6
-ByLayer
- 62
-  256
-370
-   -1
-100
-AcDbPolyline
- 90
-    4
- 70
-    1
- 43
 0
  10
--20
+105
  20
--12
+-1
  10
-85
+105
  20
--12
+61
  10
-85
+0
  20
-52
- 10
--20
- 20
-52
+60
   0
 ENDSEC
   0
@@ -3029,7 +2829,7 @@ AcDbDictionary
   0
 PLOTSETTINGS
   5
-5B
+53
 100
 AcDbPlotSettings
   6

@@ -25,7 +25,7 @@ $EXTMIN
  10
 0
  20
-0
+-2
  30
 0
   9
@@ -33,7 +33,7 @@ $EXTMAX
  10
 105
  20
-60
+62
  30
 0
   9
@@ -1115,9 +1115,9 @@ AcDbViewportTableRecord
  21
 1
  12
-98.0541471105995
+67.06342772126662
  22
-37.7855716956812
+34.3542811559158
  13
 0
  23
@@ -1143,9 +1143,9 @@ AcDbViewportTableRecord
  37
 0
  40
-121.2434231979802
+97.35325871225717
  41
-2.077669902912621
+2.127236580516898
  42
 50
  43
@@ -2649,47 +2649,9 @@ SECTION
   2
 ENTITIES
   0
-LWPOLYLINE
-  5
-4D
-100
-AcDbEntity
-  8
-0
-  6
-ByLayer
- 62
-  256
-370
-   -1
-100
-AcDbPolyline
- 90
-    4
- 70
-    1
- 43
-0
- 10
-0
- 20
-0
- 10
-105
- 20
-0
- 10
-105
- 20
-60
- 10
-0
- 20
-60
-  0
 CIRCLE
   5
-4E
+4D
 100
 AcDbEntity
   8
@@ -2711,7 +2673,7 @@ AcDbCircle
   0
 CIRCLE
   5
-4F
+4E
 100
 AcDbEntity
   8
@@ -2733,7 +2695,7 @@ AcDbCircle
   0
 CIRCLE
   5
-50
+4F
 100
 AcDbEntity
   8
@@ -2755,7 +2717,7 @@ AcDbCircle
   0
 CIRCLE
   5
-51
+50
 100
 AcDbEntity
   8
@@ -2777,7 +2739,7 @@ AcDbCircle
   0
 CIRCLE
   5
-52
+51
 100
 AcDbEntity
   8
@@ -2796,6 +2758,44 @@ AcDbCircle
 3
  40
 1.5
+  0
+LWPOLYLINE
+  5
+52
+100
+AcDbEntity
+  8
+0
+  6
+ByLayer
+ 62
+  256
+370
+   -1
+100
+AcDbPolyline
+ 90
+    4
+ 70
+    1
+ 43
+0
+ 10
+0
+ 20
+-2
+ 10
+105
+ 20
+-2
+ 10
+105
+ 20
+62
+ 10
+0
+ 20
+62
   0
 ENDSEC
   0
